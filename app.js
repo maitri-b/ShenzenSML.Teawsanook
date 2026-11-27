@@ -7,13 +7,34 @@ var ICON={
   arr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   plane:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13l8-2-3-7h2l6 6 6-1c1 0 2 .8 2 1.5s-1 1.5-2 1.5l-6-1-6 6H7l3-7-8-2z" transform="rotate(0)"/></svg>'
 };
+var PICS={
+"Dim Sum Breakfast · OH BAY · Zhongshuge Bookstore":["pg05_59","pg05_62"],
+"Qianhai Museum":["pg06_76","pg06_77","pg06_78","pg07_86","pg07_87","pg07_88","pg07_89"],
+"Sea World":["pg08_102","pg08_103","pg08_104","pg08_105","pg09_116"],
+"Ancerville on Minghua Ship":["pg09_119"],
+"Shenzhen Natural History Museum":["pg11_144","pg12_173","pg13_181","pg13_182","pg14_191","pg14_194"],
+"Upperhills":["pg15_202","pg15_211","pg15_212","pg16_221","pg16_222","pg16_227"],
+"The Bay by Chef Fei, Mandarin Oriental":["pg18_254"],
+"MO Bar, ชั้น 79":["pg19_270"],
+"OCT LOFT & OCT HARBOUR":["pg20_287","pg20_288","pg20_289","pg20_290","pg20_291"],
+"TOMOSOON Café (多么顺)":["pg21_311","pg21_312","pg21_313","pg21_314","pg21_315","pg21_316"],
+"OCT Harbour Flagship":["pg22_330","pg22_331"],
+"Magpie Restaurant 喜鹊派餐厅":["pg23_342","pg23_343","pg23_344","pg23_345","pg23_346","pg23_347"],
+"Shenzhen Talent Park · Bay Cultural Plaza":["pg24_367","pg24_368","pg24_370","pg25_382","pg25_383","pg25_388"],
+"Shenzhen Bay MixC Mall":["pg26_395","pg26_396","pg26_397","pg26_398"],
+"MOCAPE":["pg27_418","pg27_427","pg27_428","pg27_429"],
+"Free time shopping · MixC Luohu":["pg28_446","pg28_447","pg28_448"],
+"YUN DI SI NAN":["pg29_466","pg29_467"]
+};
+function src(x){return typeof x==='string'?'img/'+x+'.jpg':I(x)}
 function pics(list,mode){
   if(!list||!list.length)return "";
   var m=mode||(list.length==1?"one":list.length==2?"two":"three");
-  return '<div class="pics '+m+'">'+list.map(function(x){return '<div class="pf"><img src="'+I(x[0])+'" alt="'+x[1]+'" loading="lazy" decoding="async"></div>'}).join("")+'</div>';
+  return '<div class="pics '+m+'">'+list.map(function(x){return '<div class="pf"><img src="'+src(x[0])+'" alt="'+x[1]+'" loading="lazy" decoding="async"></div>'}).join("")+'</div>';
 }
 function chips(a){return a&&a.length?'<div class="chips">'+a.map(function(t){return "<span>"+t+"</span>"}).join("")+"</div>":""}
 function item(o){
+  var PP=PICS[o.name];if(PP){o.pics=PP.map(function(id){return [id,o.name]});o.pm=PP.length==1?"one":"grid"}
   var h='<div class="item">';
   if(o.time)h+='<span class="time">'+o.time+'</span><br>';
   h+='<h3>'+(o.tag?'<span class="tag '+(o.tagc||"")+'">'+o.tag+'</span>':"")+o.name+'</h3>';
@@ -37,11 +58,12 @@ var DAYS=[
 {n:2,dow:"SUN",date:"29 NOV 2026",title:"พิพิธภัณฑ์ธรรมชาติวิทยา เมืองบนภูเขา และมื้อค่ำมิชลิน 2 ดาว",hero:11,toc:"Natural History Museum · Upperhills · The Bay by Chef Fei",items:[
  {time:"10:00",name:"Shenzhen Natural History Museum",p:["พิพิธภัณฑ์ธรรมชาติวิทยาที่ใหญ่ที่สุดในจีนตอนใต้ เปิดเมื่อ 28 กรกฎาคม 2026 ตั้งอยู่ริมน้ำย่านผิงซาน ออกแบบโดย 3XN, B+H Architects และ Zhubo Design ภายใต้แนวคิดสามเหลี่ยมปากแม่น้ำ ตัวอาคารพริ้วไหลไปตามภูมิประเทศเหมือนสายน้ำที่ไหลมาบรรจบผืนดิน","จุดเด่นคือหลังคาเขียวลาดเอียงยาวกว่า 600 เมตร เปิดให้ขึ้นไปเดินชมระบบนิเวศบนดาดฟ้า ภายในมี 8 โซนจัดแสดงพื้นที่กว่า 100,000 ตารางเมตร เล่าประวัติศาสตร์โลกตลอด 4,600 ล้านปี"],halls:["Cosmos Hall","Earth Hall","Evolution Hall","Dinosaur Hall","Human Hall","Biology Hall","Ecology Hall","Homeland Hall"],note:"มีผู้นำชมบรรยายเป็นภาษาจีน และมี Audio Guide ภาษาอังกฤษผ่านแอป WeChat",pics:[[11,"มุมสูงพิพิธภัณฑ์ธรรมชาติวิทยาเซินเจิ้น"],[12,"โถงไดโนเสาร์ภายในพิพิธภัณฑ์"],[13,"หลังคาเขียวลาดเอียงของพิพิธภัณฑ์"]]},
  {time:"บ่าย",name:"Upperhills",p:["ไฮเอนด์คอมมูนิตี้ใจกลางเขตฟู่เทียน เปิดอย่างเป็นทางการปี 2018 ออกแบบโดย SOM ภายใต้แนวคิด Urban Mountain Complex “เมืองบนภูเขา” ผสมผสานธรรมชาติกับสถาปัตยกรรมสมัยใหม่ ตั้งอยู่ระหว่างสวนสาธารณะใหญ่สองแห่ง คือสวนเหลียนหัวซานและสวนปี้เจียซาน","โซน Open-air Town ด้านบนใช้โทนสีพาสเทลตัดกับสีอบอุ่น อาคารทรงเรขาคณิตเชื่อมกันด้วยลานกว้าง ระเบียงชมวิว และสะพานลอยคนเดิน มีเวลาเดินถ่ายรูป ช้อปปิ้งสินค้าดีไซน์เก๋ นั่งคาเฟ่ และพักผ่อนตามอัธยาศัย"],walk:[["16:30","เริ่มที่ Biji Shan Sports Park เดินขึ้นทางลาดสีเขียวซิกแซก (5 นาที)"],["16:35","ข้าม East Bridge: Bijiashan Skywalk (10 นาที)"],["16:45","ถึง Upperhills Level 3 Outdoor Loft Town เลือกชม MASONPRINCE, DOE และแฟลกชิปสโตร์ต่าง ๆ (35 นาที)"],["17:20","ข้าม West Bridge: Lianhuashan Sky-bridge (เดินชมธรรมชาติ 15 นาที)"],["17:35","ขึ้นยอด Lianhuashan Park ชมพระอาทิตย์ตก 17:50 และตึกระฟ้าย่าน CBD เปิดไฟ (30 นาที)"],["18:20","เดินกลับข้าม West Bridge เข้าด้านใน ลงชั้นล่างเดินดูร้าน Sony และ MUJI"],["18:55","ถึง Tower A, Mandarin Oriental Hotel เพื่อรับประทานอาหารค่ำกับ Chef Fei"]],pics:[[26,"ตึกสูงย่านฟู่เทียนมองจากสวน"],[29,"ลานระเบียงหลายชั้นของ Upperhills"],[27,"ร้านแฟลกชิปที่ Upperhills"]]},
- {time:"18:00",tag:"DINNER",tagc:"meal",name:"The Bay by Chef Fei, Mandarin Oriental",p:["มื้อค่ำร้านมิชลิน 2 ดาว (Two-Michelin-star dining) ที่ Mandarin Oriental"],pics:[[24,"บรรยากาศร้านและเมนูของ The Bay by Chef Fei"]],pm:"one"},
+ {time:"18:00",tag:"DINNER",tagc:"meal",name:"The Bay by Chef Fei, Mandarin Oriental",p:["มื้อค่ำร้านมิชลิน 2 ดาว (Two-Michelin-star dining) ที่ Mandarin Oriental"],pics:[[24,"อาหารและห้องอาหารของ The Bay by Chef Fei"]],pm:"wide"},
  {tag:"OPTIONAL",tagc:"opt",name:"MO Bar, ชั้น 79",p:["ติดอันดับ 5 ของ Asia’s 50 Best Bars 2026 และอันดับ 60 ของ The World’s 50 Best Bars 2026 ตั้งอยู่ชั้น 79 ของ Mandarin Oriental Shenzhen ในเขตฟู่เทียน โด่งดังเรื่องค็อกเทลสร้างสรรค์สไตล์มรดกจีน วิวสกายไลน์กว้าง และบรรยากาศอินดัสเทรียลชิค ใครสนใจแวะดื่มสักแก้วสองแก้ว"],pics:[[21,"ค็อกเทลกับวิวสกายไลน์ยามค่ำ"]],pm:"one"}
 ]},
 {n:3,dow:"MON",date:"30 NOV 2026",title:"ย่านศิลปะโรงงานเก่า และสวนแห่งอนาคตริมอ่าว",hero:34,toc:"OCT Loft · Talent Park · MixC Shenzhen Bay",items:[
  {time:"10:00",name:"OCT LOFT & OCT HARBOUR",p:["ย่านศิลปะและคอมมูนิตี้ครีเอทีฟในเขตหนานซาน เปิดอย่างเป็นทางการตั้งแต่ปี 2006 พัฒนาจากโรงงานเก่าของบริษัท OCT ที่สร้างตั้งแต่ทศวรรษ 1980 จุดเด่นคือการเก็บรักษาอาคารโรงงานสไตล์โซเวียตผสมสถาปัตยกรรมยุคปฏิรูปอุตสาหกรรมของจีนไว้ครบถ้วน อาคารอิฐเปลือยและโครงสร้างคอนกรีตเดิมถูกปรับเป็นแกลเลอรี คาเฟ่ สตูดิโอออกแบบ และร้านหนังสืออิสระ","มีเวลาเดินถ่ายรูป ชมนิทรรศการ street art และนั่งพักในคาเฟ่ตามอัธยาศัย"],chips:["Old Heaven Books","GEE Coffee Roasters","IM Loft Shop","TOMOSOON Café","HEYTEA LAB OCT Harbour"],pics:[[34,"ผนังอาคารโรงงานเก่า OCAT"],[30,"ผนังคำว่า 深圳 ในย่านศิลปะ"],[31,"ร้านหนังสือและต้นไม้ในย่านศิลปะ"]]},
+ {name:"TOMOSOON Café (多么顺)",p:["ร้านกาแฟสไตล์อินดัสเทรียลแนวอาวองต์การ์ด ตั้งอยู่ในย่าน OCT-Loft Creative Culture Park (华侨城创意园-北区)"]},
  {tag:"HEYTEA LAB",name:"OCT Harbour Flagship",p:["แฟลกชิปหลายชั้นออกแบบโดย Tomo Design มีห้องปฏิบัติการเฉพาะทาง (ice-making, dessert, tea geek lab และ illustration lab) พร้อมเจลาโต้ เพสทรี และเค้กสูตรเฉพาะ HEYTEA (喜茶) ก่อตั้งและมีสำนักงานใหญ่ในเซินเจิ้น","เปิดทุกวัน 10:00–22:00 · Unit 18-1A, Building 18, Qushuiwan, OCT Harbour, 2008 Binhai Ave, Nanshan District"],pics:[[36,"ทางเข้า HEYTEA LAB"]],pm:"one"},
  {time:"13:00",tag:"LUNCH",tagc:"meal",name:"Magpie Restaurant 喜鹊派餐厅",p:["ร้านอาหารที่อาหารพบกับศิลปะ ในย่านศิลปะ OCT Loft"],pics:[[40,"บรรยากาศภายในร้านอาหาร"]],pm:"one"},
  {time:"14:30",name:"Shenzhen Talent Park · Bay Cultural Plaza",p:["เปิดครั้งแรกเมื่อเดือนพฤศจิกายน 2017 เป็นสวนสาธารณะระดับเมืองแห่งแรกที่ยกย่องบุคลากรผู้ขับเคลื่อนเมือง ต่อมามีการเพิ่มโซน Shenzhen Bay Culture Square (Bay Cultural Plaza) ออกแบบโดย MAD Architects นำโดย Ma Yansong เริ่มพัฒนาตั้งแต่ปี 2018 และเปิดอย่างเป็นทางการในช่วงปลายปี 2025","แนวคิดคือผสานธรรมชาติเข้ากับพื้นที่เมืองริมทะเล พิพิธภัณฑ์ศิลปะและศูนย์วัฒนธรรมมีรูปทรงโค้งมนคล้ายก้อนหินขนาดมหึมา (Giant Pebbles) กลมกลืนกับสวนสีเขียว ผนังกรุหินแกรนิตสีขาวตัดเป็นเส้นตามความโค้งของอาคาร ภายในเชื่อมกันด้วยโถงรูปวงแหวน ดาดฟ้าและขั้นบันไดลดหลั่นลงสู่แนวชายฝั่ง กลายเป็นพื้นที่ชุ่มน้ำและสวนสาธารณะแบบเปิดโล่ง ได้เดินเล่นรับลมเย็นริมอ่าว ชมแสงสีของตึกระฟ้ายามค่ำคืน"],pics:[[54,"ก้อนหินยักษ์ Bay Cultural Plaza และตึกระฟ้า"],[56,"ทางเดินโค้งภายในอาคาร"],[55,"โถงโค้งของ Bay Cultural Plaza"],[57,"หน้าต่างทรงโค้งภายในอาคาร"]],pm:"two"},
@@ -92,15 +114,15 @@ function trip(){
   return h+pn("trip");
 }
 function hotel(){
-  var h='<section class="hero"><img src="'+I(80)+'" alt=""><div class="wrap"><div class="dn"><small>STAY</small>Hui</div><h1>Hui Hotel · Boutique stay for 3 nights</h1><div class="dt">FUTIAN · SHENZHEN</div></div></section>';
+  var h='<section class="hero"><img src="img/pg10_131.jpg" alt=""><div class="wrap"><div class="dn"><small>STAY</small>Hui</div><h1>Hui Hotel · Boutique stay for 3 nights</h1><div class="dt">FUTIAN · SHENZHEN</div></div></section>';
   h+='<div class="wrap block"><div class="cardl"><h3>ที่อยู่</h3><p>3015 Hongli Rd, Huaqiangbei, Futian District, Shenzhen, Guangdong Province, China, 518028</p><p style="margin-top:8px"><b style="font-weight:600">โทร</b> <a href="tel:+8675588305555">+86 755 8830 5555</a></p><div class="chips"><span>สระว่ายน้ำในร่มอุ่น 24 ชั่วโมง</span></div></div>';
-  h+='<div class="stack"><img src="'+I(81)+'" alt="อาคาร Hui Hotel ยามเย็น" loading="lazy"><img src="'+I(77)+'" alt="สระว่ายน้ำในร่ม" loading="lazy"><img src="'+I(79)+'" alt="เลานจ์และห้องสมุด" loading="lazy"><img src="'+I(82)+'" alt="ห้องอาหารของโรงแรม" loading="lazy"><img src="'+I(78)+'" alt="ฟิตเนส" loading="lazy"></div></div>';
+  h+='<div class="stack">'+["pg10_130","pg10_131","pg10_132","pg10_133","pg10_134","pg10_135","pg31_484","pg32_490"].map(function(n){return '<img src="img/'+n+'.jpg" alt="Hui Hotel" loading="lazy" decoding="async">'}).join("")+'</div></div>';
   return h+pn("hotel");
 }
 function end(){
   return '<section class="end"><div class="wrap"><img class="grp" src="img/sml6.png" alt="โลโก้กลุ่ม SML6 นกหัวขวาน"><div class="kick">SML6 · หมู่นกหัวขวาน</div><h1>'+TITLE+'</h1>'
   +'<dl class="meta"><div><dt>วันเดินทาง</dt><dd>28 พ.ย. – 1 ธ.ค. 2026 · 4 วัน 3 คืน</dd></div><div><dt>เส้นทาง</dt><dd>กรุงเทพฯ ⇄ เซินเจิ้น</dd></div><div><dt>สายการบิน</dt><dd>China Southern Airlines · CZ 8158 / CZ 8157</dd></div><div><dt>ที่พัก</dt><dd>Hui Hotel, Futian</dd></div></dl>'
-  +'<div class="collab"><span class="cur">Curated by</span><div class="bb">brotherbear<em>.Co</em></div><span class="x">×</span><img src="img/teaw_logo.png" alt="เที่ยวสนุก ทราเวลเซ็นเตอร์ Teawsanook Travel Center"></div>'
+  +'<div class="collab"><span class="cur">Curated by</span><div class="bb"><img class="bear" src="img/bear.png" alt="" width="64"><span>Brotherbear<em>.Co</em></span></div><span class="x">×</span><img src="img/teaw_logo.png" alt="เที่ยวสนุก ทราเวลเซ็นเตอร์ Teawsanook Travel Center"></div>'
   +'<div class="site">TEAWSANOOK.COM</div><a class="btn" style="margin-top:28px" href="#/home">กลับไปสารบัญ</a></div></section>';
 }
 var VIEWS={home:home,trip:trip,hotel:hotel,end:end,day1:function(){return dayPage(DAYS[0])},day2:function(){return dayPage(DAYS[1])},day3:function(){return dayPage(DAYS[2])},day4:function(){return dayPage(DAYS[3])}};
@@ -116,5 +138,20 @@ function route(){
   var tt=id=="home"?"Shenzhen for Lovers of Urban Design & Future Trends":NAMES[id]+" · Shenzhen SML6";
   document.title=tt;window.scrollTo(0,0);
 }
-window.addEventListener("hashchange",route);route();
+
+/* lightbox */
+var lb=document.createElement("div");lb.className="lb";lb.hidden=true;lb.setAttribute("role","dialog");lb.setAttribute("aria-modal","true");lb.setAttribute("aria-label","ดูรูปขยาย");
+lb.innerHTML='<button class="lb-x" aria-label="ปิด">&times;</button><button class="lb-p" aria-label="รูปก่อนหน้า">&#8249;</button><img alt=""><button class="lb-n" aria-label="รูปถัดไป">&#8250;</button><div class="lb-c"></div>';
+document.body.appendChild(lb);
+var lbImg=lb.querySelector("img"),lbC=lb.querySelector(".lb-c"),grp=[],cur=0,pushed=false,sx=0;
+function show(i){cur=(i+grp.length)%grp.length;lbImg.src=grp[cur].src;lbImg.alt=grp[cur].alt;lbC.textContent=grp.length>1?(cur+1)+" / "+grp.length:"";lb.classList.toggle("single",grp.length<2)}
+function openLb(img){var box=img.closest(".pics,.stack");grp=Array.prototype.slice.call(box?box.querySelectorAll("img"):[img]);show(grp.indexOf(img));lb.hidden=false;document.body.style.overflow="hidden";if(!pushed){history.pushState({lb:1},"");pushed=true}lb.querySelector(".lb-x").focus()}
+function closeLb(fromPop){if(lb.hidden)return;lb.hidden=true;lbImg.removeAttribute("src");document.body.style.overflow="";if(pushed&&!fromPop){pushed=false;history.back()}else pushed=false}
+document.addEventListener("click",function(e){var im=e.target.closest(".pics img,.stack img");if(im){openLb(im);return}
+ if(lb.hidden)return;if(e.target.closest(".lb-x")||e.target===lb)closeLb();else if(e.target.closest(".lb-p"))show(cur-1);else if(e.target.closest(".lb-n"))show(cur+1)});
+document.addEventListener("keydown",function(e){if(lb.hidden)return;if(e.key==="Escape")closeLb();else if(e.key==="ArrowLeft")show(cur-1);else if(e.key==="ArrowRight")show(cur+1)});
+lb.addEventListener("touchstart",function(e){sx=e.changedTouches[0].clientX},{passive:true});
+lb.addEventListener("touchend",function(e){var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50&&grp.length>1)show(cur+(d<0?1:-1))},{passive:true});
+window.addEventListener("popstate",function(){closeLb(true)});
+window.addEventListener("hashchange",function(){if(!lb.hidden)closeLb(true);route()});route();
 })();
